@@ -5,16 +5,16 @@ import "fmt"
 func main() {
 	conferenceName := "Go Conference"
 	const conferenceTickets int = 50
-	var remainingTicktets uint = 50
+	var remainingTickets uint = 50
 
 	fmt.Printf("Welcome to %v booking application!\n", conferenceName)
-	fmt.Printf("We have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTicktets)
+	fmt.Printf("We have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here!")
 
 	var firstName string
 	var lastName string
 	var email string
-	var userTickets int
+	var userTickets uint
 	// ask user for name
 	// pass the reference of the memory object
 	fmt.Println("Enter your fist name: ")
@@ -26,6 +26,8 @@ func main() {
 	fmt.Println("Enter number of tickets: ")
 	fmt.Scan(&userTickets)
 
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will recieve a confirmation email at %v\n", firstName, lastName, userTickets, email)
+	remainingTickets = remainingTickets - userTickets
 
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will recieve a confirmation email at %v\n", firstName, lastName, userTickets, email)
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 }
