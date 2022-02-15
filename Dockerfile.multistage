@@ -1,0 +1,26 @@
+# BUILD
+from golang:1.16-alpine AS build
+
+WORKDIR /app
+
+ENV GO111MODULE=on
+COPY go.mod .
+RUN go mod download
+
+COPY . .
+
+
+RUN go build -o /booking-app
+
+# Deploy
+FROM gcr.io/distroless/base-debian10
+
+WORKDIR /
+
+COPY --from=build /booking-app /booking-app
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/booking-app"]
